@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_fic9_ecommerce_app/data/datasources/auth_local_datasource.dart';
+import 'package:flutter_fic9_ecommerce_app/data/models/requests/login_request_model.dart';
 
 import '../../common/components/button.dart';
 import '../../common/components/custom_text_field.dart';
 import '../../common/constants/colors.dart';
 import '../../common/components/spaces.dart';
 import '../../common/constants/images.dart';
-import '../home/dashboard_page.dart';
+import '../dashboard/dashboard_page.dart';
+import 'bloc/login/login_bloc.dart';
 import 'register_page.dart';
 
 class LoginPage extends StatefulWidget {
@@ -16,12 +20,12 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final usernameController = TextEditingController();
+  final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
   @override
   void dispose() {
-    usernameController.dispose();
+    emailController.dispose();
     passwordController.dispose();
     super.dispose();
   }
@@ -64,7 +68,7 @@ class _LoginPageState extends State<LoginPage> {
           ),
           const SpaceHeight(40.0),
           CustomTextField(
-            controller: usernameController,
+            controller: emailController,
             label: 'Username',
           ),
           const SpaceHeight(12.0),
@@ -74,16 +78,51 @@ class _LoginPageState extends State<LoginPage> {
             obscureText: true,
           ),
           const SpaceHeight(24.0),
-          Button.filled(
-            onPressed: () {
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const DashboardPage(),
-                ),
+          BlocConsumer<LoginBloc, LoginState>(
+            listener: (context, state) {
+              state.maybeWhen(
+                  orElse: () {},
+                  success: (data) async {
+                    AuthLocalDatasource().saveAuthData(data);
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const DashboardPage(),
+                      ),
+                    );
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Login Berhasil'),
+                        backgroundColor: Colors.green,
+                      ),
+                    );
+                  },
+                  error: (error) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(error),
+                        backgroundColor: Colors.red,
+                      ),
+                    );
+                  });
+            },
+            builder: (context, state) {
+              return Button.filled(
+                onPressed: () {
+                  // Navigator.pushReplacement(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //     builder: (context) => const DashboardPage(),
+                  //   ),
+                  // );
+                  final data = LoginRequestModel(
+                      identifier: emailController.text,
+                      password: passwordController.text);
+                  context.read<LoginBloc>().add(LoginEvent.login(data));
+                },
+                label: 'Masuk',
               );
             },
-            label: 'Masuk',
           ),
           const SpaceHeight(122.0),
           Center(
