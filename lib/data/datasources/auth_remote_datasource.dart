@@ -11,7 +11,7 @@ class AuthRemoteDatasource {
       RegisterRequestModel data) async {
     final headers = {'Content-Type': 'application/json'};
     final response = await http.post(
-      Uri.parse('${Variables.baseUrl}api/auth/local/register'),
+      Uri.parse('${Variables.baseUrl}/api/auth/local/register'),
       body: data.toJson(),
       headers: headers,
     );
@@ -27,7 +27,7 @@ class AuthRemoteDatasource {
       LoginRequestModel data) async {
     final headers = {'Content-Type': 'application/json'};
     final response = await http.post(
-      Uri.parse('${Variables.baseUrl}api/auth/local'),
+      Uri.parse('${Variables.baseUrl}/api/auth/local'),
       body: data.toJson(),
       headers: headers,
     );

@@ -230,9 +230,11 @@ class FluffyAttributes {
 }
 
 class Formats {
+  // final Large medium;
   final Large thumbnail;
 
   Formats({
+    // required this.medium,
     required this.thumbnail,
   });
 
@@ -241,10 +243,12 @@ class Formats {
   String toJson() => json.encode(toMap());
 
   factory Formats.fromMap(Map<String, dynamic> json) => Formats(
+        // medium: Large.fromMap(json["medium"]),
         thumbnail: Large.fromMap(json["thumbnail"]),
       );
 
   Map<String, dynamic> toMap() => {
+        // "medium": medium.toMap(),
         "thumbnail": thumbnail.toMap(),
       };
 }
