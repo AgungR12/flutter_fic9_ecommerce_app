@@ -5,6 +5,7 @@ import 'package:flutter_fic9_ecommerce_app/data/models/responses/products_respon
 import 'package:flutter_fic9_ecommerce_app/presentation/auth/bloc/login/login_bloc.dart';
 import 'package:flutter_fic9_ecommerce_app/presentation/auth/login_page.dart';
 import 'package:flutter_fic9_ecommerce_app/presentation/auth/splash_page.dart';
+import 'package:flutter_fic9_ecommerce_app/presentation/cart/bloc/cart/cart_bloc.dart';
 import 'package:flutter_fic9_ecommerce_app/presentation/dashboard/dashboard_page.dart';
 import 'package:flutter_fic9_ecommerce_app/presentation/home/bloc/products/products_bloc.dart';
 
@@ -29,6 +30,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) =>
               ProductsBloc()..add(const ProductsEvent.getAll()),
+        ),
+        BlocProvider(
+          create: (context) => CartBloc(),
         ),
       ],
       child: MaterialApp(

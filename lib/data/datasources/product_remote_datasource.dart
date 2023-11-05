@@ -8,7 +8,6 @@ class ProductRemoteDatasource {
     final response = await http
         .get(Uri.parse('${Variables.baseUrl}/api/products?populate=*'));
     if (response.statusCode == 200) {
-      print(ProductsResponseModel.fromJson(response.body));
       return Right(ProductsResponseModel.fromJson(response.body));
     } else {
       return const Left('Server Error');
