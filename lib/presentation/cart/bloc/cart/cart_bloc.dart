@@ -30,12 +30,18 @@ class CartBloc extends Bloc<CartEvent, CartState> {
       final index = currentState.carts
           .indexWhere((element) => element.product.id == event.cart.product.id);
       if (index >= 0) {
+        currentState.carts[index].quantity -= 1;
         if (currentState.carts[index].quantity <= 0) {
           currentState.carts.removeAt(index);
         }
         emit(const _Loading());
         emit(_Loaded(currentState.carts));
       }
+    });
+
+    on<_Started>((event, emit) {
+      emit(const _Loading());
+      emit(const _Loaded([]));
     });
   }
 }
