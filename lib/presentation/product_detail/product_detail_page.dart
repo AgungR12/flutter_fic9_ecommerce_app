@@ -14,7 +14,9 @@ import '../cart/widgets/cart_model.dart';
 import '../home/widgets/image_slider.dart';
 import '../home/widgets/product_model.dart';
 import 'widgets/product_description_widget.dart';
+import 'widgets/product_detail_widget.dart';
 import 'widgets/product_info_widget.dart';
+import 'widgets/product_title_widget.dart';
 
 class ProductDetailPage extends StatefulWidget {
   const ProductDetailPage({
@@ -58,9 +60,19 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
             },
           ),
           const SpaceHeight(11.0),
+          ProductTitleWidget(
+            padding: paddingHorizontal,
+            title: widget.product.attributes.name,
+          ),
+          const SpaceHeight(11.0),
           ProductDescriptionWidget(
             padding: paddingHorizontal,
             description: widget.product.attributes.description,
+          ),
+          const SpaceHeight(11.0),
+          ProductDetailWidget(
+            padding: paddingHorizontal,
+            detail: widget.product.attributes.detail,
           ),
           const SpaceHeight(11.0),
           Padding(

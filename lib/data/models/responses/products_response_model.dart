@@ -59,6 +59,7 @@ class PurpleAttributes {
   final DateTime createdAt;
   final DateTime updatedAt;
   final DateTime publishedAt;
+  final String detail;
   final Images images;
 
   PurpleAttributes({
@@ -69,6 +70,7 @@ class PurpleAttributes {
     required this.createdAt,
     required this.updatedAt,
     required this.publishedAt,
+    required this.detail,
     required this.images,
   });
 
@@ -86,6 +88,7 @@ class PurpleAttributes {
         createdAt: DateTime.parse(json["createdAt"]),
         updatedAt: DateTime.parse(json["updatedAt"]),
         publishedAt: DateTime.parse(json["publishedAt"]),
+        detail: json["detail"],
         images: Images.fromMap(json["images"]),
       );
 
@@ -97,6 +100,7 @@ class PurpleAttributes {
         "createdAt": createdAt.toIso8601String(),
         "updatedAt": updatedAt.toIso8601String(),
         "publishedAt": publishedAt.toIso8601String(),
+        "detail": detail,
         "images": images.toMap(),
       };
 }
