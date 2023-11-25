@@ -1,8 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_fic9_ecommerce_app/data/datasources/order_remote_datasource.dart';
-import 'package:flutter_fic9_ecommerce_app/data/models/requests/order_request_model.dart';
-import 'package:flutter_fic9_ecommerce_app/data/models/responses/order_response_model.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+
+import '../../../../data/datasources/order_remote_datasource.dart';
+import '../../../../data/models/requests/order_request_model.dart';
+import '../../../../data/models/responses/order_response_model.dart';
 
 part 'order_event.dart';
 part 'order_state.dart';

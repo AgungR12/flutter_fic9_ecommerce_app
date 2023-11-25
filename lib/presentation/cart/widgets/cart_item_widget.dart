@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_fic9_ecommerce_app/common/constants/variables.dart';
 import 'package:flutter_fic9_ecommerce_app/common/extensions/int_ext.dart';
 import 'package:flutter_fic9_ecommerce_app/data/models/responses/products_response_model.dart';
 import 'package:flutter_fic9_ecommerce_app/presentation/cart/bloc/cart/cart_bloc.dart';
@@ -7,7 +8,6 @@ import 'package:flutter_fic9_ecommerce_app/presentation/cart/bloc/cart/cart_bloc
 import '../../../common/components/spaces.dart';
 import '../../../common/constants/colors.dart';
 import '../../../common/constants/images.dart' as localImages;
-import '../../../common/constants/variables.dart';
 import 'cart_model.dart';
 
 class CartItemWidget extends StatefulWidget {
