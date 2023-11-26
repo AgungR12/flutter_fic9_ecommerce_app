@@ -14,6 +14,8 @@ import 'package:flutter_fic9_ecommerce_app/presentation/shipping_address/bloc/ge
 import 'presentation/auth/bloc/register/register_bloc.dart';
 import 'presentation/cart/bloc/get_cost/get_cost_bloc.dart';
 import 'presentation/cart/bloc/order/order_bloc.dart';
+import 'presentation/order/bloc/buyer_order/buyer_order_bloc.dart';
+import 'presentation/order/bloc/cek_resi/cek_resi_bloc.dart';
 import 'presentation/payment/bloc/order_detail/order_detail_bloc.dart';
 import 'presentation/shipping_address/bloc/city/city_bloc.dart';
 import 'presentation/shipping_address/bloc/province/province_bloc.dart';
@@ -65,6 +67,12 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => GetCostBloc(),
+        ),
+        BlocProvider(
+          create: (context) => BuyerOrderBloc(),
+        ),
+        BlocProvider(
+          create: (context) => CekResiBloc(),
         ),
       ],
       child: MaterialApp(

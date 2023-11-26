@@ -9,6 +9,7 @@ import 'package:flutter_fic9_ecommerce_app/data/models/responses/order_response_
 import 'package:http/http.dart' as http;
 
 import '../../common/constants/variables.dart';
+import '../models/responses/buyer_order_response_model.dart';
 
 class OrderRemoteDatasource {
   Future<Either<String, OrderResponseModel>> order(
@@ -83,6 +84,26 @@ class OrderRemoteDatasource {
 
     if (response.statusCode == 200) {
       return right(GetAddressResponseModel.fromJson(response.body));
+    } else {
+      return left('Server Error');
+    }
+  }
+
+  // get Buyer Id
+  Future<Either<String, BuyerOrderResponseModel>> getOrderByBuyerId() async {
+    final token = await AuthLocalDatasource().getToken();
+    final user = await AuthLocalDatasource().getUser();
+    final response = await http.get(
+      Uri.parse(
+          '${Variables.baseUrl}/api/orders?filters[buyerId][\$eq]=${user.id}'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization': 'Bearer $token',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      return right(BuyerOrderResponseModel.fromJson(response.body));
     } else {
       return left('Server Error');
     }
